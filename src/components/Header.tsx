@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import serenityLogo from "@/assets/serenity-logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -32,18 +33,12 @@ export const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <span className="text-primary font-serif text-xl font-semibold">S</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="font-serif text-xl text-foreground tracking-wide">
-                Serenity
-              </span>
-              <span className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                Institute
-              </span>
-            </div>
+          <a href="#home" className="flex items-center group">
+            <img 
+              src={serenityLogo} 
+              alt="Serenity Institute" 
+              className="h-12 w-auto group-hover:scale-105 transition-transform"
+            />
           </a>
 
           {/* Desktop Navigation */}
