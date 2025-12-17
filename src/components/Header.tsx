@@ -33,13 +33,21 @@ export const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#home" className="flex items-center group">
+          <a href="#home" className="flex items-center gap-3 group">
             <img 
               src={serenityLogo} 
               alt="Serenity Institute" 
               className="h-20 w-auto group-hover:scale-105 transition-transform"
               style={{ filter: 'brightness(0) saturate(100%) invert(67%) sepia(31%) saturate(487%) hue-rotate(127deg) brightness(92%) contrast(89%)' }}
             />
+            <div className="hidden sm:block">
+              <span className="font-serif text-xl text-foreground tracking-wide">
+                Serenity
+              </span>
+              <span className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+                Institute
+              </span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
