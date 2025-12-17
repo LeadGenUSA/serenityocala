@@ -37,7 +37,8 @@ export const Header = () => {
             <img 
               src={serenityLogo} 
               alt="Serenity Institute" 
-              className="h-12 w-auto group-hover:scale-105 transition-transform"
+              className="h-20 w-auto group-hover:scale-105 transition-transform"
+              style={{ filter: 'brightness(0) saturate(100%) invert(67%) sepia(31%) saturate(487%) hue-rotate(127deg) brightness(92%) contrast(89%)' }}
             />
           </a>
 
