@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import serenityLogo from "@/assets/serenity-logo.png";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,17 +10,11 @@ export const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-                <span className="text-primary-foreground font-serif text-xl font-semibold">S</span>
-              </div>
-              <div>
-                <span className="font-serif text-xl tracking-wide">Serenity</span>
-                <span className="block text-[10px] tracking-[0.2em] text-primary-foreground/60 uppercase">
-                  Institute
-                </span>
-              </div>
-            </div>
+            <img 
+              src={serenityLogo} 
+              alt="Serenity Institute" 
+              className="h-16 w-auto mb-4 bg-white/90 rounded-lg p-1"
+            />
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               Dr. Beth Robinson, PhD, LHMC<br />
               Consultation & Counseling for Adults, Children, and Couples
