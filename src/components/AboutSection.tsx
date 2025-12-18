@@ -1,26 +1,26 @@
 import { Heart, Users, Brain, Sparkles } from "lucide-react";
 import therapistImage from "@/assets/therapist-portrait.jpg";
-
-const achievements = [
-  { icon: Heart, text: "Satisfying relationships" },
-  { icon: Brain, text: "Improved feelings management" },
-  { icon: Sparkles, text: "Inner peace and tranquility" },
-  { icon: Users, text: "Career success & productivity" },
-];
-
+const achievements = [{
+  icon: Heart,
+  text: "Satisfying relationships"
+}, {
+  icon: Brain,
+  text: "Improved feelings management"
+}, {
+  icon: Sparkles,
+  text: "Inner peace and tranquility"
+}, {
+  icon: Users,
+  text: "Career success & productivity"
+}];
 export const AboutSection = () => {
-  return (
-    <section id="about" className="py-24 lg:py-32 bg-section-gradient">
+  return <section id="about" className="py-24 lg:py-32 bg-section-gradient border border-solid border-primary-glow">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image Column */}
           <div className="relative animate-fade-in-up opacity-0">
             <div className="relative z-10">
-              <img
-                src={therapistImage}
-                alt="Dr. Beth Robinson"
-                className="w-full max-w-md mx-auto lg:mx-0 rounded-3xl shadow-elevated object-cover aspect-[3/4]"
-              />
+              <img alt="Dr. Beth Robinson" className="w-full max-w-md mx-auto lg:mx-0 rounded-3xl shadow-elevated object-cover aspect-[3/4]" src="/lovable-uploads/957a1878-d3ae-417b-b87b-471a2c035c74.png" />
             </div>
             {/* Decorative elements */}
             <div className="absolute -bottom-6 -right-6 w-full h-full bg-primary/10 rounded-3xl -z-0" />
@@ -57,21 +57,15 @@ export const AboutSection = () => {
 
             {/* Achievements */}
             <div className="mt-10 grid sm:grid-cols-2 gap-4 animate-fade-in-up opacity-0 delay-300">
-              {achievements.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-4 bg-card rounded-xl shadow-soft hover:shadow-card transition-shadow"
-                >
+              {achievements.map((item, index) => <div key={index} className="flex items-center gap-3 p-4 bg-card rounded-xl shadow-soft hover:shadow-card transition-shadow">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <span className="text-sm font-medium text-foreground">{item.text}</span>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
