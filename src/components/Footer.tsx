@@ -1,5 +1,5 @@
 import { Phone, Mail, MapPin } from "lucide-react";
-import serenityLogo from "@/assets/serenity-logo.png";
+import serenityLogo from "@/assets/serenity-new-logo.png";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,7 +14,6 @@ export const Footer = () => {
               src={serenityLogo} 
               alt="Serenity Institute" 
               className="h-24 w-auto mb-4"
-              style={{ filter: 'brightness(0) saturate(100%) invert(67%) sepia(31%) saturate(487%) hue-rotate(127deg) brightness(92%) contrast(89%)' }}
             />
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               Dr. Beth Robinson, PhD, LHMC<br />
