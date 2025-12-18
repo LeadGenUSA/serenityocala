@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import serenityLogo from "@/assets/serenity-logo.png";
+import serenityLogo from "@/assets/serenity-new-logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -38,7 +38,6 @@ export const Header = () => {
               src={serenityLogo} 
               alt="Serenity Institute" 
               className="h-20 w-auto group-hover:scale-105 transition-transform"
-              style={{ filter: 'brightness(0) saturate(100%) invert(67%) sepia(31%) saturate(487%) hue-rotate(127deg) brightness(92%) contrast(89%)' }}
             />
             <div className="hidden sm:block">
               <span className="font-serif text-xl text-foreground tracking-wide">
