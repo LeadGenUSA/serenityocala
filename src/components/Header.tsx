@@ -34,13 +34,11 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 group">
-            <div className="bg-white/90 rounded-full p-2">
-              <img 
-                src={serenityLogo} 
-                alt="Serenity Institute" 
-                className="h-16 w-auto group-hover:scale-105 transition-transform drop-shadow-[0_0_20px_rgba(93,173,161,1)] drop-shadow-[0_0_40px_rgba(93,173,161,0.8)]"
-              />
-            </div>
+            <img 
+              src={serenityLogo} 
+              alt="Serenity Institute" 
+              className="h-20 w-auto group-hover:scale-105 transition-transform drop-shadow-[0_0_20px_rgba(93,173,161,1)] drop-shadow-[0_0_40px_rgba(93,173,161,0.8)]"
+            />
             <div className="hidden sm:block">
               <span className="font-serif text-xl text-foreground tracking-wide">
                 Serenity
