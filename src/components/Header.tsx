@@ -37,7 +37,7 @@ export const Header = () => {
             <img 
               src={serenityLogo} 
               alt="Serenity Institute" 
-              className="h-20 w-auto group-hover:scale-105 transition-transform drop-shadow-[0_0_20px_rgba(93,173,161,1)] drop-shadow-[0_0_40px_rgba(93,173,161,0.8)]"
+              className="h-20 w-auto group-hover:scale-105 transition-transform drop-shadow-[0_0_15px_rgba(93,173,161,0.9)]"
             />
             <div className="hidden sm:block">
               <span className="font-serif text-xl text-foreground tracking-wide">
