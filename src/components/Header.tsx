@@ -5,12 +5,12 @@ import { SiteSearch } from "@/components/SiteSearch";
 import serenityLogo from "@/assets/serenity-new-logo.png";
 
 const navLinks = [
-  { name: "Home", href: "/#home" },
+  { name: "Home", href: "#home" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Resources", href: "/resources" },
   { name: "Self-Assessment", href: "/self-assessment" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export const Header = () => {
@@ -36,7 +36,7 @@ export const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="/#home" className="flex items-center gap-3 group">
+          <a href="#home" className="flex items-center gap-3 group">
             <img 
               src={serenityLogo} 
               alt="Serenity Institute" 
@@ -74,10 +74,13 @@ export const Header = () => {
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span>352-671-7932</span>
+              <span><a
+                href="tel:352-671-7932"
+                className="flex items-center gap-2 text-muted-foreground"
+              ></span>
             </a>
             <Button variant="default" size="sm" asChild>
-              <a href="/#contact">Book Consultation</a>
+              <a href="#contact">Book Consultation</a>
             </Button>
           </div>
 
@@ -128,7 +131,7 @@ export const Header = () => {
                 <span>drbeth@serenityocala.com</span>
               </a>
               <Button variant="default" className="mt-2" asChild>
-                <a href="/#contact">Book Consultation</a>
+                <a href="#contact">Book Consultation</a>
               </Button>
             </div>
           </nav>
