@@ -56,15 +56,18 @@ export const Footer = () => {
               >
                 About
               </a>
-              {["Services", "Contact"].map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
-                >
-                  {link}
-                </a>
-              ))}
+              <a
+                href="/services"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Services
+              </a>
+              <a
+                href="/#contact"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Contact
+              </a>
               <a
                 href="/resources"
                 className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
