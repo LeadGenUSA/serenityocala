@@ -86,14 +86,8 @@ const Resources = () => {
 
           {/* Resource Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {resources.map((resource, index) => (
-              <a
-                key={index}
-                href={resource.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
-              >
+            {resources.map((resource, index) => {
+              const cardContent = (
                 <Card
                   className="p-6 h-full bg-card-gradient border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300 animate-fade-in-up opacity-0"
                   style={{ animationDelay: `${(index + 1) * 80}ms` }}
@@ -105,7 +99,9 @@ const Resources = () => {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-serif text-base text-foreground group-hover:text-primary transition-colors mb-1 flex items-center gap-1.5">
                         {resource.title}
-                        <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        {!resource.internal && (
+                          <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        )}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {resource.description}
@@ -118,8 +114,28 @@ const Resources = () => {
                     </div>
                   </div>
                 </Card>
-              </a>
-            ))}
+              );
+
+              if (resource.internal) {
+                return (
+                  <Link key={index} to={resource.href} className="group">
+                    {cardContent}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={index}
+                  href={resource.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  {cardContent}
+                </a>
+              );
+            })}
           </div>
         </div>
       </main>
