@@ -1,16 +1,21 @@
 
 
-## Darken Logo Teal Glow
+## Add Site Search Bar
 
-**`src/components/Header.tsx`** — Change the logo's `drop-shadow` from the current bright teal glow to a darker, more saturated teal that provides contrast for the white logo:
+Add a search icon button in the header that opens a command palette (dialog) for searching across all site pages. Uses the existing `cmdk` Command component already in the project.
 
-```
-drop-shadow-[0_0_15px_rgba(93,173,161,0.9)]
-```
-→
-```
-drop-shadow-[0_0_25px_rgba(20,100,90,1)] drop-shadow-[0_0_50px_rgba(20,100,90,0.8)]
-```
+### New File
 
-This uses a much darker teal (`rgb(20,100,90)`) with a double drop-shadow — a tight 25px glow plus a wider 50px spread — creating a dark enough backdrop behind the logo for white elements to stand out clearly.
+**`src/components/SiteSearch.tsx`** — A search component that:
+- Renders a Search icon button in the header
+- Opens a Command dialog (using existing `command.tsx` UI) with keyboard shortcut `Ctrl+K` / `Cmd+K`
+- Contains a searchable list of all site pages grouped by category (Pages, Resources, Information)
+- On selection, navigates to the chosen page using `react-router-dom`'s `useNavigate`
+- Pages list includes: Home, About, Services, Resources, Self-Assessment, Directions, Policies & Procedures, Fees & Insurance, Cancellations, plus all resource sub-pages (EMDR, CBT, EFT, etc.)
+
+### Updated File
+
+**`src/components/Header.tsx`** — Add the `<SiteSearch />` component:
+- Desktop: place it next to the phone number in the right-side actions area
+- Mobile: add it inside the mobile menu section
 
