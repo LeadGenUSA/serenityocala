@@ -54,15 +54,15 @@ export const ContactSection = () => {
         </div>
 
         {/* Contact Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           {contactInfo.map((item, index) => (
             <Card
               key={index}
-              className="p-6 bg-card-gradient border-border/50 text-center animate-fade-in-up opacity-0"
+              className="p-4 bg-card-gradient border-border/50 text-center animate-fade-in-up opacity-0"
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <item.icon className="w-5 h-5 text-primary" />
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
+                <item.icon className="w-4 h-4 text-primary" />
               </div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
                 {item.label}
