@@ -24,25 +24,35 @@ const AnimalAssistedTherapy = () => {
 
           {/* Definition */}
           <section className="mb-12">
-            <Card className="p-8 bg-card-gradient border-border/50">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <PawPrint className="w-6 h-6 text-primary" />
+            <div className="flex flex-col md:flex-row gap-8">
+              <Card className="p-8 bg-card-gradient border-border/50 flex-1">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <PawPrint className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h2 className="font-serif text-xl text-foreground mb-3">What is AAT?</h2>
+                    <blockquote className="border-l-4 border-primary/30 pl-4 italic text-muted-foreground leading-relaxed">
+                      "A goal-directed intervention in which an animal is incorporated as an integral 
+                      part of the clinical health-care treatment process. AAT is delivered or directed 
+                      by a professional health or human service provider who demonstrates skill and 
+                      expertise regarding the clinical applications of human-animal interactions."
+                    </blockquote>
+                    <p className="text-sm text-muted-foreground mt-3">
+                      — American Humane Association
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="font-serif text-xl text-foreground mb-3">What is AAT?</h2>
-                  <blockquote className="border-l-4 border-primary/30 pl-4 italic text-muted-foreground leading-relaxed">
-                    "A goal-directed intervention in which an animal is incorporated as an integral 
-                    part of the clinical health-care treatment process. AAT is delivered or directed 
-                    by a professional health or human service provider who demonstrates skill and 
-                    expertise regarding the clinical applications of human-animal interactions."
-                  </blockquote>
-                  <p className="text-sm text-muted-foreground mt-3">
-                    — American Humane Association
-                  </p>
-                </div>
+              </Card>
+              <div className="flex-shrink-0">
+                <img
+                  src={juliTherapyRoom}
+                  alt="Juli in Therapy Room"
+                  className="w-40 h-40 rounded-2xl object-cover shadow-elevated"
+                />
+                <p className="text-sm text-muted-foreground text-center mt-2">Juli in Therapy Room</p>
               </div>
-            </Card>
+            </div>
           </section>
 
           {/* Meet Juli */}
