@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ArrowRight, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -8,6 +8,12 @@ const contactInfo = [
     label: "Phone",
     value: "352-671-7932",
     href: "tel:352-671-7932",
+  },
+  {
+    icon: Printer,
+    label: "Fax",
+    value: "352-237-8363",
+    href: "tel:352-237-8363",
   },
   {
     icon: Mail,
