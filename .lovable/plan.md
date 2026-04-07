@@ -1,18 +1,15 @@
 
 
-## Add Fax Number: 352-237-8363
+## Fit All Contact Cards on One Line
 
-Add the fax number to all locations where contact info is displayed.
+There are 5 contact cards (Phone, Fax, Email, Address, Hours) in a grid that currently maxes at `lg:grid-cols-4`. To fit all 5 on one row, we need to adjust the grid and reduce card padding.
 
-### Changes
+### Changes in `src/components/ContactSection.tsx`
 
-**1. `src/components/ContactSection.tsx`**
-- Add a new entry to the `contactInfo` array with a fax icon, label "Fax", value "352-237-8363", and `href: "tel:352-237-8363"`
-- Use the `Phone` icon (or import a `Printer` icon from lucide-react as a fax symbol)
+1. Change grid classes from `sm:grid-cols-2 lg:grid-cols-4` to `sm:grid-cols-2 lg:grid-cols-5`
+2. Reduce card padding from `p-6` to `p-4`
+3. Reduce icon container from `w-12 h-12` to `w-10 h-10` and icon from `w-5 h-5` to `w-4 h-4`
+4. Reduce bottom margin on icon container from `mb-4` to `mb-2`
 
-**2. `src/components/Footer.tsx`**
-- Add a fax line in the Contact column, below the phone number, styled the same way
-
-**3. `src/components/Header.tsx`**
-- No change — keep the header clean with just the main phone number
+This keeps the cards readable while fitting all 5 across on desktop viewports.
 
