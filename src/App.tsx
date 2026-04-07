@@ -10,6 +10,7 @@ import CBTTherapy from "./pages/resources/CBTTherapy";
 import EFTTherapy from "./pages/resources/EFTTherapy";
 import DifferentialGeneExpression from "./pages/resources/DifferentialGeneExpression";
 import About from "./pages/About";
+import Services from "./pages/Services";
 import SelfAssessment from "./pages/SelfAssessment";
 import NotFound from "./pages/NotFound";
 
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/emdr-therapy" element={<EMDRTherapy />} />
           <Route path="/resources/cbt" element={<CBTTherapy />} />
