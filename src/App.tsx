@@ -10,6 +10,7 @@ import CBTTherapy from "./pages/resources/CBTTherapy";
 import EFTTherapy from "./pages/resources/EFTTherapy";
 import DifferentialGeneExpression from "./pages/resources/DifferentialGeneExpression";
 import About from "./pages/About";
+import SelfAssessment from "./pages/SelfAssessment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/resources/cbt" element={<CBTTherapy />} />
           <Route path="/resources/eft" element={<EFTTherapy />} />
           <Route path="/resources/differential-gene-expression" element={<DifferentialGeneExpression />} />
+          <Route path="/self-assessment" element={<SelfAssessment />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

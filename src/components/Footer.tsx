@@ -71,6 +71,12 @@ export const Footer = () => {
               >
                 Resources
               </a>
+              <a
+                href="/self-assessment"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Self-Assessment
+              </a>
             </nav>
           </div>
 
