@@ -2,34 +2,39 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ExternalLink, BookOpen, Brain, Heart, PawPrint, FileText, Moon } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const resources = [
   {
     title: "What is EMDR Therapy?",
     description: "Eye Movement Desensitization and Reprocessing",
     author: "By Steve B. Reed, L.P.C., L.M.F.T",
-    href: "https://www.serenityocala.com/resources/what-is-emdr-therapy/",
+    href: "/resources/emdr-therapy",
+    internal: true,
     icon: Brain,
   },
   {
     title: "What is Cognitive Behavioral Therapy?",
     description:
       "CBT is a form of psychotherapy that emphasizes the important role of thinking in how we feel and what we do.",
-    href: "https://www.serenityocala.com/resources/what-is-cognitive-behavioral-therapy-cbt/",
+    href: "/resources/cbt",
+    internal: true,
     icon: BookOpen,
   },
   {
     title: "What is EFT?",
     description: "Emotional Freedom Techniques",
     author: "By Steve B. Reed, L.P.C., L.M.F.T",
-    href: "https://www.serenityocala.com/resources/what-is-emotional-freedom-techniques-eft/",
+    href: "/resources/eft",
+    internal: true,
     icon: Heart,
   },
   {
     title: "Differential Gene Expression after EFT Treatment",
     description: "Effect of Emotional Freedom Techniques on Genes",
     author: "By Dr. Beth Robinson, L.M.H.C",
-    href: "https://www.serenityocala.com/resource-content/Differential-Gene-Expression-After-EFT-Treatment.pdf",
+    href: "/resources/differential-gene-expression",
+    internal: true,
     icon: FileText,
   },
   {
@@ -81,14 +86,8 @@ const Resources = () => {
 
           {/* Resource Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {resources.map((resource, index) => (
-              <a
-                key={index}
-                href={resource.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
-              >
+            {resources.map((resource, index) => {
+              const cardContent = (
                 <Card
                   className="p-6 h-full bg-card-gradient border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300 animate-fade-in-up opacity-0"
                   style={{ animationDelay: `${(index + 1) * 80}ms` }}
@@ -100,7 +99,9 @@ const Resources = () => {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-serif text-base text-foreground group-hover:text-primary transition-colors mb-1 flex items-center gap-1.5">
                         {resource.title}
-                        <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        {!resource.internal && (
+                          <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        )}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {resource.description}
@@ -113,8 +114,28 @@ const Resources = () => {
                     </div>
                   </div>
                 </Card>
-              </a>
-            ))}
+              );
+
+              if (resource.internal) {
+                return (
+                  <Link key={index} to={resource.href} className="group">
+                    {cardContent}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={index}
+                  href={resource.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  {cardContent}
+                </a>
+              );
+            })}
           </div>
         </div>
       </main>
