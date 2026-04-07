@@ -74,10 +74,7 @@ export const Header = () => {
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span><a
-                href="tel:352-671-7932"
-                className="flex items-center gap-2 text-muted-foreground"
-              ></span>
+              <span>352-671-7932</span>
             </a>
             <Button variant="default" size="sm" asChild>
               <a href="#contact">Book Consultation</a>
