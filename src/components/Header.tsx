@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SiteSearch } from "@/components/SiteSearch";
 import serenityLogo from "@/assets/serenity-new-logo.png";
 
 const navLinks = [
@@ -66,7 +67,8 @@ export const Header = () => {
           </nav>
 
           {/* Contact & CTA */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
+            <SiteSearch />
             <a
               href="tel:352-671-7932"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -107,6 +109,10 @@ export const Header = () => {
               </a>
             ))}
             <div className="flex flex-col gap-3 pt-4 border-t border-border">
+              <div className="flex items-center gap-2">
+                <SiteSearch />
+                <span className="text-sm text-muted-foreground">Search (Ctrl+K)</span>
+              </div>
               <a
                 href="tel:352-671-7932"
                 className="flex items-center gap-2 text-muted-foreground"
