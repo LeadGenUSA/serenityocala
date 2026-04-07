@@ -9,6 +9,7 @@ import EMDRTherapy from "./pages/resources/EMDRTherapy";
 import CBTTherapy from "./pages/resources/CBTTherapy";
 import EFTTherapy from "./pages/resources/EFTTherapy";
 import DifferentialGeneExpression from "./pages/resources/DifferentialGeneExpression";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/emdr-therapy" element={<EMDRTherapy />} />
           <Route path="/resources/cbt" element={<CBTTherapy />} />
