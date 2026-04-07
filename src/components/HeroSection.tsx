@@ -35,7 +35,7 @@ export const HeroSection = () => {
 
           <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 animate-fade-in-up opacity-0 delay-200">
             Dr. Beth Robinson, PhD, LHMC offers compassionate counseling for adults, 
-            children, and couples. Over 13 years helping people transform their lives 
+            children, and couples. Over 20 years helping people transform their lives 
             through EFT, EMDR, CBT, and Animal Assisted Psychotherapy.
           </p>
 
@@ -52,7 +52,7 @@ export const HeroSection = () => {
           <div className="mt-12 pt-8 border-t border-border/50 animate-fade-in-up opacity-0 delay-400">
             <div className="flex flex-wrap gap-8">
               <div>
-                <div className="text-3xl font-serif text-primary">13+</div>
+                <div className="text-3xl font-serif text-primary">20+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
               <div>
