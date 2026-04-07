@@ -24,7 +24,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Address",
-    value: "20757 W. Pennsylvania Ave, Ste. B1\nDunnellon, FL 34431",
+    value: "20757 W. Pennsylvania Ave\nSuite B1\nDunnellon, FL 34431",
     href: "https://maps.google.com/?q=20757+W+Pennsylvania+Ave+Dunnellon+FL+34431",
   },
   {
