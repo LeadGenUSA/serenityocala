@@ -108,7 +108,10 @@ export const Header = () => {
                 {link.name}
               </a>
             ))}
-            <div className="flex flex-col gap-3 pt-4 border-t border-border">
+              <div className="flex items-center gap-2">
+                <SiteSearch />
+                <span className="text-sm text-muted-foreground">Search (Ctrl+K)</span>
+              </div>
               <a
                 href="tel:352-671-7932"
                 className="flex items-center gap-2 text-muted-foreground"
