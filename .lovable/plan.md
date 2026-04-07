@@ -1,21 +1,13 @@
 
 
-## Add Site Search Bar
+## Fix Home Link in Header
 
-Add a search icon button in the header that opens a command palette (dialog) for searching across all site pages. Uses the existing `cmdk` Command component already in the project.
+**`src/components/Header.tsx`** — Change the Home nav link's `href` from `#home` to `/#home` so it navigates to the home page route first, then scrolls to the anchor. Also update the logo link from `#home` to `/#home` for consistency.
 
-### New File
+Changes:
+- Line in `navLinks` array: `{ name: "Home", href: "#home" }` → `{ name: "Home", href: "/#home" }`
+- Logo `<a href="#home">` → `<a href="/#home">`
+- Similarly update the Contact link: `#contact` → `/#contact` (and the "Book Consultation" buttons)
 
-**`src/components/SiteSearch.tsx`** — A search component that:
-- Renders a Search icon button in the header
-- Opens a Command dialog (using existing `command.tsx` UI) with keyboard shortcut `Ctrl+K` / `Cmd+K`
-- Contains a searchable list of all site pages grouped by category (Pages, Resources, Information)
-- On selection, navigates to the chosen page using `react-router-dom`'s `useNavigate`
-- Pages list includes: Home, About, Services, Resources, Self-Assessment, Directions, Policies & Procedures, Fees & Insurance, Cancellations, plus all resource sub-pages (EMDR, CBT, EFT, etc.)
-
-### Updated File
-
-**`src/components/Header.tsx`** — Add the `<SiteSearch />` component:
-- Desktop: place it next to the phone number in the right-side actions area
-- Mobile: add it inside the mobile menu section
+This ensures that clicking "Home" from any page (e.g. `/self-assessment`) navigates back to the index page and scrolls to the correct section.
 
