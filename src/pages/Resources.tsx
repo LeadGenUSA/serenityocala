@@ -2,34 +2,39 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ExternalLink, BookOpen, Brain, Heart, PawPrint, FileText, Moon } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const resources = [
   {
     title: "What is EMDR Therapy?",
     description: "Eye Movement Desensitization and Reprocessing",
     author: "By Steve B. Reed, L.P.C., L.M.F.T",
-    href: "https://www.serenityocala.com/resources/what-is-emdr-therapy/",
+    href: "/resources/emdr-therapy",
+    internal: true,
     icon: Brain,
   },
   {
     title: "What is Cognitive Behavioral Therapy?",
     description:
       "CBT is a form of psychotherapy that emphasizes the important role of thinking in how we feel and what we do.",
-    href: "https://www.serenityocala.com/resources/what-is-cognitive-behavioral-therapy-cbt/",
+    href: "/resources/cbt",
+    internal: true,
     icon: BookOpen,
   },
   {
     title: "What is EFT?",
     description: "Emotional Freedom Techniques",
     author: "By Steve B. Reed, L.P.C., L.M.F.T",
-    href: "https://www.serenityocala.com/resources/what-is-emotional-freedom-techniques-eft/",
+    href: "/resources/eft",
+    internal: true,
     icon: Heart,
   },
   {
     title: "Differential Gene Expression after EFT Treatment",
     description: "Effect of Emotional Freedom Techniques on Genes",
     author: "By Dr. Beth Robinson, L.M.H.C",
-    href: "https://www.serenityocala.com/resource-content/Differential-Gene-Expression-After-EFT-Treatment.pdf",
+    href: "/resources/differential-gene-expression",
+    internal: true,
     icon: FileText,
   },
   {
