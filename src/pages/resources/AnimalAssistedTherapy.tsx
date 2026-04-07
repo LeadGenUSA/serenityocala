@@ -58,17 +58,27 @@ const AnimalAssistedTherapy = () => {
           {/* Meet Juli */}
           <section className="mb-12">
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-4">Meet Juli</h2>
-            <div className="prose prose-muted max-w-none space-y-4">
-              <p className="text-muted-foreground leading-relaxed">
-                Juli has been working with Dr. Robinson in her office since 8 weeks old. She is a 
-                larger toy poodle and completely hypoallergenic. Juli went through extensive obedience 
-                training and passed her Canine Good Citizen test.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Juli is friendly and very loving. She is remarkable at detecting emotional hurts and 
-                will offer lots of consolation for them! Juli is with Dr. Robinson almost every day 
-                and loves coming to work.
-              </p>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex-shrink-0">
+                <img
+                  src={bethAndJuli}
+                  alt="Dr. Robinson and Juli"
+                  className="w-48 rounded-2xl object-cover shadow-elevated"
+                />
+                <p className="text-sm text-muted-foreground text-center mt-2">Dr. Robinson & Juli</p>
+              </div>
+              <div className="prose prose-muted max-w-none space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Juli has been working with Dr. Robinson in her office since 8 weeks old. She is a 
+                  larger toy poodle and completely hypoallergenic. Juli went through extensive obedience 
+                  training and passed her Canine Good Citizen test.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Juli is friendly and very loving. She is remarkable at detecting emotional hurts and 
+                  will offer lots of consolation for them! Juli is with Dr. Robinson almost every day 
+                  and loves coming to work.
+                </p>
+              </div>
             </div>
           </section>
 
