@@ -1,26 +1,18 @@
 
 
-## Add Social Media Icons
+## Add Fax Number: 352-237-8363
 
-Add Facebook, LinkedIn, X (Twitter), and YouTube icons with links to the Footer and optionally the Header.
+Add the fax number to all locations where contact info is displayed.
 
-### Location
-**Footer** — Add a row of social media icons in the brand column (below the description text) or as a new row in the bottom bar.
+### Changes
 
-### Technical Details
+**1. `src/components/ContactSection.tsx`**
+- Add a new entry to the `contactInfo` array with a fax icon, label "Fax", value "352-237-8363", and `href: "tel:352-237-8363"`
+- Use the `Phone` icon (or import a `Printer` icon from lucide-react as a fax symbol)
 
-**File: `src/components/Footer.tsx`**
-- Import `Facebook`, `Linkedin`, `Youtube` from `lucide-react`
-- For the X (Twitter) icon, lucide-react has a `Twitter` icon — use it or create a simple custom SVG for the new X logo
-- Add a social links array with the 4 URLs and corresponding icons
-- Render them as a horizontal row of icon links in the brand column, after the description text
-- Style: `text-primary-foreground/70 hover:text-primary-foreground` with smooth transitions, sized ~20px
+**2. `src/components/Footer.tsx`**
+- Add a fax line in the Contact column, below the phone number, styled the same way
 
-**Links:**
-- Facebook → `https://www.facebook.com/serenityinstituteinc`
-- LinkedIn → `https://www.linkedin.com/in/beth-maharaj-44708978/`
-- X → `https://x.com/drbethlmhc`
-- YouTube → `https://www.youtube.com/channel/UC7rwr0oF_mAJChQzamm1rQQ`
-
-All links open in new tabs (`target="_blank" rel="noopener noreferrer"`).
+**3. `src/components/Header.tsx`**
+- No change — keep the header clean with just the main phone number
 
