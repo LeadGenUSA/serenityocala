@@ -59,6 +59,12 @@ export const Footer = () => {
                   {link}
                 </a>
               ))}
+              <a
+                href="/resources"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Resources
+              </a>
             </nav>
           </div>
 
