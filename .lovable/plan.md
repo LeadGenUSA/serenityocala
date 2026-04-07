@@ -1,24 +1,16 @@
 
 
-## Add Info Pages and Footer Links
+## Darken Logo Teal Glow
 
-Create 4 new pages and add a second column of links in the footer beside "Quick Links."
+**`src/components/Header.tsx`** — Change the logo's `drop-shadow` from the current bright teal glow to a darker, more saturated teal that provides contrast for the white logo:
 
-### New Pages
+```
+drop-shadow-[0_0_15px_rgba(93,173,161,0.9)]
+```
+→
+```
+drop-shadow-[0_0_25px_rgba(20,100,90,1)] drop-shadow-[0_0_50px_rgba(20,100,90,0.8)]
+```
 
-All pages follow the existing pattern: Header, content section, Footer, consistent styling.
-
-1. **`src/pages/Directions.tsx`** — Embedded Google Maps iframe for "20757 W Pennsylvania Ave, Ste B1, Dunnellon, FL 34431" with the office address displayed below.
-
-2. **`src/pages/PoliciesAndProcedures.tsx`** — Sections for Confidentiality (with bullet list of exceptions, minor treatment rules), After Hours Emergencies, Vacations, and Terminating Treatment.
-
-3. **`src/pages/FeesAndInsurance.tsx`** — Since the reference URL points to the same policies page, this will be a brief page stating fees are discussed during the initial consultation and to contact the office for insurance questions, with a link to the contact section.
-
-4. **`src/pages/Cancellations.tsx`** — Content about missed appointment charges, 24-hour answering service cancellation, and court appearance rescheduling policy.
-
-### Updated Files
-
-1. **`src/App.tsx`** — Add 4 new routes: `/directions`, `/policies-and-procedures`, `/fees-and-insurance`, `/cancellations`.
-
-2. **`src/components/Footer.tsx`** — Change the footer grid from `md:grid-cols-3` to `md:grid-cols-4`. Add a new column titled "Information" between Quick Links and Contact containing links to the 4 new pages.
+This uses a much darker teal (`rgb(20,100,90)`) with a double drop-shadow — a tight 25px glow plus a wider 50px spread — creating a dark enough backdrop behind the logo for white elements to stand out clearly.
 
