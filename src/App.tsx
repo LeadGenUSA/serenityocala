@@ -13,6 +13,10 @@ import AnimalAssistedTherapy from "./pages/resources/AnimalAssistedTherapy";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import SelfAssessment from "./pages/SelfAssessment";
+import Directions from "./pages/Directions";
+import PoliciesAndProcedures from "./pages/PoliciesAndProcedures";
+import FeesAndInsurance from "./pages/FeesAndInsurance";
+import Cancellations from "./pages/Cancellations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +38,10 @@ const App = () => (
           <Route path="/resources/differential-gene-expression" element={<DifferentialGeneExpression />} />
           <Route path="/resources/animal-assisted-therapy" element={<AnimalAssistedTherapy />} />
           <Route path="/self-assessment" element={<SelfAssessment />} />
+          <Route path="/directions" element={<Directions />} />
+          <Route path="/policies-and-procedures" element={<PoliciesAndProcedures />} />
+          <Route path="/fees-and-insurance" element={<FeesAndInsurance />} />
+          <Route path="/cancellations" element={<Cancellations />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

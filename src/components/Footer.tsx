@@ -18,7 +18,7 @@ export const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground py-16">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
             <img 
@@ -79,6 +79,37 @@ export const Footer = () => {
                 className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
               >
                 Self-Assessment
+              </a>
+            </nav>
+          </div>
+
+          {/* Information */}
+          <div>
+            <h4 className="font-serif text-lg mb-4">Information</h4>
+            <nav className="space-y-2">
+              <a
+                href="/directions"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Directions
+              </a>
+              <a
+                href="/policies-and-procedures"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Policies &amp; Procedures
+              </a>
+              <a
+                href="/fees-and-insurance"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Fees &amp; Insurance
+              </a>
+              <a
+                href="/cancellations"
+                className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+              >
+                Cancellations
               </a>
             </nav>
           </div>
