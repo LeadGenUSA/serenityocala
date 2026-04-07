@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Printer, Facebook, Linkedin, Youtube } from "lucide-react";
 import serenityLogo from "@/assets/serenity-new-logo.png";
 
 const socialLinks = [
@@ -73,6 +73,10 @@ export const Footer = () => {
                 <Phone className="w-4 h-4" />
                 352-671-7932
               </a>
+              <div className="flex items-center gap-2 text-primary-foreground/70">
+                <Printer className="w-4 h-4" />
+                Fax: 352-237-8363
+              </div>
               <a
                 href="mailto:drbeth@serenityocala.com"
                 className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
