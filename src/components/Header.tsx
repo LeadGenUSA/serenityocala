@@ -67,7 +67,8 @@ export const Header = () => {
           </nav>
 
           {/* Contact & CTA */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
+            <SiteSearch />
             <a
               href="tel:352-671-7932"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
