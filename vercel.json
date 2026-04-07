@@ -1,18 +1,8 @@
 {
   "routes": [
-    { "src": "/about", "dest": "/" },
-    { "src": "/services", "dest": "/" }
-    { "src": "/self-assessment", "dest": "/" }
-    { "src": "/resources", "dest": "/" }
-    { "src": "/resources/eft", "dest": "/" }
-    { "src": "/resources/emdr-therapy", "dest": "/" }
-    { "src": "/resources/animal-assited-therapy", "dest": "/" }
-    { "src": "/directions", "dest": "/" }
-    { "src": "/policies-and-procedures", "dest": "/" }
-    { "src": "/fees-and-insurance", "dest": "/" }
-    { "src": "/cancellations", "dest": "/" }
-    { "src": "/privacy", "dest": "/" }
-    { "src": "/tos", "dest": "/" }
-    // ....
+    {
+      "src": "/[^.]+",
+      "dest": "/"
+    }
   ]
 }
