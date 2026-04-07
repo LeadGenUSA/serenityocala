@@ -9,6 +9,7 @@ import EMDRTherapy from "./pages/resources/EMDRTherapy";
 import CBTTherapy from "./pages/resources/CBTTherapy";
 import EFTTherapy from "./pages/resources/EFTTherapy";
 import DifferentialGeneExpression from "./pages/resources/DifferentialGeneExpression";
+import AnimalAssistedTherapy from "./pages/resources/AnimalAssistedTherapy";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import SelfAssessment from "./pages/SelfAssessment";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/resources/cbt" element={<CBTTherapy />} />
           <Route path="/resources/eft" element={<EFTTherapy />} />
           <Route path="/resources/differential-gene-expression" element={<DifferentialGeneExpression />} />
+          <Route path="/resources/animal-assisted-therapy" element={<AnimalAssistedTherapy />} />
           <Route path="/self-assessment" element={<SelfAssessment />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

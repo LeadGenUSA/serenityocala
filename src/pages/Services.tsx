@@ -89,7 +89,7 @@ const Services = () => {
                 { icon: Sparkles, title: "EFT Therapy", description: "Emotional Freedom Techniques to release emotional pain and trauma through tapping on meridian points.", href: "/resources/eft" },
                 { icon: Brain, title: "EMDR Therapy", description: "Eye Movement Desensitization and Reprocessing for healing trauma and PTSD symptoms.", href: "/resources/emdr-therapy" },
                 { icon: Waves, title: "CBT", description: "Cognitive Behavioral Therapy to identify and change negative thought patterns affecting your life.", href: "/resources/cbt" },
-                { icon: TreePine, title: "Animal Assisted Therapy", description: "Experience healing through the calming presence and unconditional support of therapy animals.", href: null },
+                { icon: TreePine, title: "Animal Assisted Therapy", description: "Experience healing through the calming presence and unconditional support of therapy animals.", href: "/resources/animal-assisted-therapy" },
                 { icon: Users, title: "Couples Counseling", description: "Strengthen your relationship through improved communication and deeper understanding.", href: null },
                 { icon: Heart, title: "Individual Therapy", description: "Personalized one-on-one sessions tailored to your unique needs and healing journey.", href: null },
               ].map((service, index) => (
