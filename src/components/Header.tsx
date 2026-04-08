@@ -81,14 +81,20 @@ export const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Controls */}
+          <div className="lg:hidden flex items-center gap-2">
+            <SiteSearch />
+            <a href="tel:352-671-7932" className="p-2 text-muted-foreground hover:text-primary transition-colors" aria-label="Call us">
+              <Phone className="w-5 h-5" />
+            </a>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-foreground"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -97,7 +103,7 @@ export const Header = () => {
             isMobileMenuOpen ? "max-h-96 mt-4" : "max-h-0"
           }`}
         >
-          <nav className="flex flex-col gap-4 py-4 border-t border-border">
+          <nav className="flex flex-col gap-4 py-4 bg-white dark:bg-card rounded-lg shadow-lg p-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
