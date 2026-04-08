@@ -150,6 +150,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-primary-foreground/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/50">
           <p>© {currentYear} Serenity Institute. All rights reserved.</p>
+          <p>Designed by <a href="https://keddiemedia.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors underline">Keddiemedia.com</a></p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-primary-foreground transition-colors">
               Privacy Policy
