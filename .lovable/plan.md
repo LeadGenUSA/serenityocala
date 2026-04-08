@@ -1,13 +1,17 @@
 
 
-## Fix Home Link in Header
+## Fix Mobile Menu: White Background, Phone Number & Search Visible
 
-**`src/components/Header.tsx`** — Change the Home nav link's `href` from `#home` to `/#home` so it navigates to the home page route first, then scrolls to the anchor. Also update the logo link from `#home` to `/#home` for consistency.
+**Problem**: The mobile dropdown menu has a transparent background (inherits from header), making links invisible. Phone number and search are buried below.
 
-Changes:
-- Line in `navLinks` array: `{ name: "Home", href: "#home" }` → `{ name: "Home", href: "/#home" }`
-- Logo `<a href="#home">` → `<a href="/#home">`
-- Similarly update the Contact link: `#contact` → `/#contact` (and the "Book Consultation" buttons)
+**Changes in `src/components/Header.tsx`**:
 
-This ensures that clicking "Home" from any page (e.g. `/self-assessment`) navigates back to the index page and scrolls to the correct section.
+1. **White background on mobile menu** — Add `bg-white rounded-lg shadow-lg p-4` to the mobile menu container (line 96-98) so links are readable against a solid background.
+
+2. **Show phone number and search in the top bar on mobile** — Move the phone number and search icon out of the hidden mobile dropdown and into the main header bar, visible alongside the hamburger menu on small screens. This means changing the mobile toggle area (around lines 84-91) to include a row with search icon, phone icon, and hamburger menu.
+
+Specifically:
+- Replace the mobile toggle button section with a flex row containing `<SiteSearch />`, a phone link (icon only), and the hamburger button — all visible on `lg:hidden`.
+- Keep the full phone number, email, and search in the dropdown as well for discoverability.
+- Add `bg-white dark:bg-card rounded-lg shadow-lg` to the mobile dropdown `nav` container.
 
