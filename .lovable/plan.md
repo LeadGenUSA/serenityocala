@@ -1,37 +1,34 @@
 
 
-## Set Up Resend Email Sending for Forms
+## Send Emails via Vercel Serverless Functions + Resend
 
-Since you've explicitly requested Resend, we'll use the Resend connector to send emails from your forms (currently the Self-Assessment form, and the Contact section).
+Since your site is hosted on Vercel with Resend already connected, we'll create a **Vercel Serverless Function** (API route) to handle email sending — no Lovable Cloud or Supabase needed.
 
-### Prerequisites
+### Prerequisites (on your end)
 
-1. **Enable Lovable Cloud** — required for Edge Functions and connectors
-2. **Connect Resend** — link your Resend account via the connector system
+- Your Vercel project must have the `RESEND_API_KEY` environment variable set (sounds like it already does since Resend is connected)
+- Your Resend account must have a verified sending domain (e.g., `serenityocala.com`)
 
 ### Steps
 
-1. **Connect Resend connector** — prompt you to link your Resend account (you'll need a Resend account with a verified sending domain, e.g. `drbeth@serenityocala.com`)
-
-2. **Create a Supabase Edge Function `send-email`** — a single Edge Function that:
-   - Accepts `to`, `from`, `subject`, `html` fields
+1. **Create `api/send-email.ts`** — a Vercel Serverless Function that:
+   - Accepts POST requests with `to`, `from`, `subject`, `html` fields
    - Validates input with Zod
-   - Sends via the Resend connector gateway
-   - Includes CORS headers for browser calls
+   - Calls the Resend API using your `RESEND_API_KEY`
+   - Returns success/error response with proper CORS headers
 
-3. **Update `SelfAssessment.tsx`** — wire the form submit to call the Edge Function, sending:
-   - A notification email to `drbeth@serenityocala.com` with the form data (name, email, checked items, message)
-   - A confirmation email to the submitter
+2. **Update `vercel.json`** — add the API route so it doesn't get caught by the SPA fallback
 
-4. **Update `ContactSection.tsx`** — if there's a contact form to wire up (currently it's just links to phone/email, so no changes needed unless you want a contact form added)
-
-5. **Deploy the Edge Function**
+3. **Update `SelfAssessment.tsx`** — wire the form submit to `POST /api/send-email`, sending:
+   - A notification email to `drbeth@serenityocala.com` with the submitter's name, email, selected checklist items, and message
+   - A confirmation email back to the submitter
+   - Show loading state on the button during submission
 
 ### Technical Details
 
-- Edge Function at `supabase/functions/send-email/index.ts`
-- Uses Resend connector gateway: `https://connector-gateway.lovable.dev/resend/emails`
-- Auth via `LOVABLE_API_KEY` + `RESEND_API_KEY` headers
-- From address must match your verified Resend domain
-- Supabase client created in the frontend to invoke the function
+- API route: `api/send-email.ts` (Vercel auto-deploys files in the `api/` folder as serverless functions)
+- Resend SDK called directly server-side using `RESEND_API_KEY` from `process.env`
+- From address: something like `noreply@serenityocala.com` (must match your verified Resend domain)
+- Frontend calls `/api/send-email` via `fetch`
+- No new dependencies needed — we'll use `fetch` to call Resend's REST API directly
 
