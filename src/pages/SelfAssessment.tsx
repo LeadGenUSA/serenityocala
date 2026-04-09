@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
-const TURNSTILE_SITE_KEY = "0x4AAAAAABeT2IT4GHaGPxB2";
+import { TURNSTILE_SITE_KEY } from "@/lib/turnstile";
 
 declare global {
   interface Window {
