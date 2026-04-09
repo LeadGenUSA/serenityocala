@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -7,6 +7,27 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAABeT2IT4GHaGPxB2";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: string | HTMLElement,
+        options: {
+          sitekey: string;
+          callback: (token: string) => void;
+          "expired-callback"?: () => void;
+          "error-callback"?: () => void;
+          theme?: "light" | "dark" | "auto";
+        }
+      ) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
+}
 
 const checklistItems = [
   "I want more peace in my life",
@@ -23,11 +44,49 @@ const SelfAssessment = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  const renderWidget = useCallback(() => {
+    if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(null),
+        "error-callback": () => setTurnstileToken(null),
+        theme: "light",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!document.querySelector('script[src*="turnstile"]')) {
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.onload = () => renderWidget();
+      document.head.appendChild(script);
+    } else {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          renderWidget();
+          clearInterval(interval);
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [renderWidget]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) {
       toast.error("Please fill in your name and email.");
+      return;
+    }
+
+    if (!turnstileToken) {
+      toast.error("Please complete the CAPTCHA verification.");
       return;
     }
 
@@ -43,6 +102,7 @@ const SelfAssessment = () => {
           email: email.trim(),
           checkedItems,
           message: message.trim(),
+          turnstileToken,
         }),
       });
 
@@ -55,10 +115,14 @@ const SelfAssessment = () => {
       setName("");
       setEmail("");
       setMessage("");
+      setTurnstileToken(null);
     } catch {
       toast.error("Something went wrong. Please try calling us at 352-671-7932.");
     } finally {
       setIsSubmitting(false);
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
     }
   };
 
@@ -134,6 +198,9 @@ const SelfAssessment = () => {
                 />
               </div>
             </div>
+
+            {/* Turnstile Widget */}
+            <div ref={turnstileRef} />
 
             <Button type="submit" size="lg" disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Submit Assessment"}
