@@ -1,23 +1,37 @@
 
 
-## Use Serenity Institute Logo as Favicon
+## Set Up Resend Email Sending for Forms
 
-The logo is at `src/assets/serenity-new-logo.png` (used in Header and Footer). To use it as a favicon:
+Since you've explicitly requested Resend, we'll use the Resend connector to send emails from your forms (currently the Self-Assessment form, and the Contact section).
 
-**Steps:**
+### Prerequisites
 
-1. **Copy the logo to `public/`** — Copy `src/assets/serenity-new-logo.png` to `public/favicon.png`.
+1. **Enable Lovable Cloud** — required for Edge Functions and connectors
+2. **Connect Resend** — link your Resend account via the connector system
 
-2. **Delete `public/favicon.ico`** — Remove the default Lovable favicon so browsers don't pick it up automatically.
+### Steps
 
-3. **Update `index.html`** — Change the favicon link from:
-   ```html
-   <link rel="icon" href="/favicon.ico" />
-   ```
-   to:
-   ```html
-   <link rel="icon" href="/favicon.png" type="image/png" />
-   ```
+1. **Connect Resend connector** — prompt you to link your Resend account (you'll need a Resend account with a verified sending domain, e.g. `drbeth@serenityocala.com`)
 
-> **Note:** The logo may not look ideal at very small sizes (16x16 or 32x32) since it was designed as a full logo. If search results still show the old icon, it may take time for search engines to re-crawl. You could also consider using the yin-yang icon (`yin-yang-icon.png`) as an alternative — it may be more recognizable at small sizes.
+2. **Create a Supabase Edge Function `send-email`** — a single Edge Function that:
+   - Accepts `to`, `from`, `subject`, `html` fields
+   - Validates input with Zod
+   - Sends via the Resend connector gateway
+   - Includes CORS headers for browser calls
+
+3. **Update `SelfAssessment.tsx`** — wire the form submit to call the Edge Function, sending:
+   - A notification email to `drbeth@serenityocala.com` with the form data (name, email, checked items, message)
+   - A confirmation email to the submitter
+
+4. **Update `ContactSection.tsx`** — if there's a contact form to wire up (currently it's just links to phone/email, so no changes needed unless you want a contact form added)
+
+5. **Deploy the Edge Function**
+
+### Technical Details
+
+- Edge Function at `supabase/functions/send-email/index.ts`
+- Uses Resend connector gateway: `https://connector-gateway.lovable.dev/resend/emails`
+- Auth via `LOVABLE_API_KEY` + `RESEND_API_KEY` headers
+- From address must match your verified Resend domain
+- Supabase client created in the frontend to invoke the function
 
