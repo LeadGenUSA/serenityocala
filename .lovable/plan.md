@@ -1,40 +1,19 @@
 
+Root cause:
+- The toast is only the symptom. The form never receives a Turnstile token because both `src/components/ContactSection.tsx` and `src/pages/SelfAssessment.tsx` are still using the placeholder site key `0x4AAAAAABeT2IT4GHaGPxB2`.
+- Your console logs show Turnstile error `400020`, which Cloudflare documents as `Invalid sitekey`. When that happens, the widget cannot issue a token, so the submit handler falls back to `Please complete the CAPTCHA verification.`
 
-## Add Contact Form with Turnstile to ContactSection
+Plan:
+1. Replace the placeholder Turnstile site key in both frontend forms with your real Cloudflare site key.
+2. Move that site key into one shared frontend config/helper so the contact form and self-assessment form stay in sync.
+3. Improve the Turnstile error handling in both forms so a misconfigured widget shows a clear message instead of telling visitors to complete a CAPTCHA that never loaded correctly.
+4. Keep the existing server-side verification in `api/send-contact.ts` and `api/send-email.ts` as-is, since this specific issue is happening before the request is sent.
+5. Re-test both forms end-to-end. If Cloudflare then reports `110200`, add `serenityocala.com`, `serenityocala.lovable.app`, and `*.lovable.app` under Turnstile Hostname Management.
 
-Replace the "Send Email" button in the CTA card with an inline contact form that sends messages via the existing Vercel + Resend setup, protected by Cloudflare Turnstile.
+Technical details:
+- Files to update: `src/components/ContactSection.tsx`, `src/pages/SelfAssessment.tsx`, and likely a small shared Turnstile config file.
+- The public Turnstile site key is safe to store in the frontend codebase.
+- `TURNSTILE_SECRET_KEY` must still remain configured on the server, but it is not the cause of this current toast.
 
-### Prerequisites (on your end)
-
-- Create a Cloudflare Turnstile site at [dash.cloudflare.com/turnstile](https://dash.cloudflare.com/turnstile) and get your **Site Key** and **Secret Key**
-- Add `TURNSTILE_SECRET_KEY` as an environment variable in your Vercel project settings
-
-### Changes
-
-**1. Create `api/send-contact.ts`** — new Vercel serverless function for the contact form
-- Accepts: `firstName`, `lastName`, `email`, `phone` (optional), `message`, `turnstileToken`
-- Validates all fields server-side
-- Verifies Turnstile token with Cloudflare's `siteverify` endpoint before sending
-- Sends notification email to `drbeth@serenityocala.com` with all fields
-- Sends confirmation email back to submitter
-- Uses same Resend setup as `send-email.ts`
-
-**2. Update `src/components/ContactSection.tsx`**
-- Replace the CTA card's "Send Email" button area with a form containing: first name, last name, email, phone (optional), message, and Turnstile widget
-- Keep the "Call Now" button
-- Form submits to `/api/send-contact`
-- Load Turnstile script via `<script>` tag and render the widget
-- Show loading/success/error states with toast notifications
-
-**3. Add Turnstile site key**
-- Store the public Turnstile site key in a constant in the component (it's a public key, safe to include in client code)
-- I'll use a placeholder that you'll replace with your actual key
-
-**4. Update `vercel.json`** — already handles `/api/*` routes, no change needed
-
-### Technical Details
-
-- Turnstile client widget: loaded via `https://challenges.cloudflare.com/turnstile/v0/api.js` script tag
-- Server verification: `POST https://challenges.cloudflare.com/turnstile/v0/siteverify` with `secret` + `response`
-- The form replaces only the CTA card content; contact info cards above remain unchanged
-
+Implementation dependency:
+- I’ll need your real Cloudflare Turnstile site key to complete the fix.
