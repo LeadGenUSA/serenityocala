@@ -1,19 +1,51 @@
 
-Root cause:
-- The toast is only the symptom. The form never receives a Turnstile token because both `src/components/ContactSection.tsx` and `src/pages/SelfAssessment.tsx` are still using the placeholder site key `0x4AAAAAABeT2IT4GHaGPxB2`.
-- Your console logs show Turnstile error `400020`, which Cloudflare documents as `Invalid sitekey`. When that happens, the widget cannot issue a token, so the submit handler falls back to `Please complete the CAPTCHA verification.`
 
-Plan:
-1. Replace the placeholder Turnstile site key in both frontend forms with your real Cloudflare site key.
-2. Move that site key into one shared frontend config/helper so the contact form and self-assessment form stay in sync.
-3. Improve the Turnstile error handling in both forms so a misconfigured widget shows a clear message instead of telling visitors to complete a CAPTCHA that never loaded correctly.
-4. Keep the existing server-side verification in `api/send-contact.ts` and `api/send-email.ts` as-is, since this specific issue is happening before the request is sent.
-5. Re-test both forms end-to-end. If Cloudflare then reports `110200`, add `serenityocala.com`, `serenityocala.lovable.app`, and `*.lovable.app` under Turnstile Hostname Management.
+# Save Form Submissions to Supabase
 
-Technical details:
-- Files to update: `src/components/ContactSection.tsx`, `src/pages/SelfAssessment.tsx`, and likely a small shared Turnstile config file.
-- The public Turnstile site key is safe to store in the frontend codebase.
-- `TURNSTILE_SECRET_KEY` must still remain configured on the server, but it is not the cause of this current toast.
+## Summary
+Add a Supabase database to store contact form and self-assessment submissions, inserting records from the existing Vercel serverless functions after emails are sent.
 
-Implementation dependency:
-- I’ll need your real Cloudflare Turnstile site key to complete the fix.
+## Setup Required (by you)
+
+1. **Connect Supabase** — In Lovable, go to the Supabase integration and connect a project (or create a new one). This gives the project the `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` environment variables.
+
+2. **Create two tables** in your Supabase dashboard:
+
+```text
+contact_submissions
+├── id (uuid, primary key, auto-generated)
+├── first_name (text)
+├── last_name (text)
+├── email (text)
+├── phone (text, nullable)
+├── message (text)
+├── created_at (timestamptz, default now())
+
+self_assessment_submissions
+├── id (uuid, primary key, auto-generated)
+├── name (text)
+├── email (text)
+├── checked_items (text[], array of selected goals)
+├── message (text, nullable)
+├── created_at (timestamptz, default now())
+```
+
+## Code Changes
+
+1. **`api/send-contact.ts`** — After the emails send successfully, insert a row into `contact_submissions` using the Supabase JS client (initialized with `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` from Vercel env vars).
+
+2. **`api/send-email.ts`** — Same approach: after emails send, insert into `self_assessment_submissions`.
+
+3. **Add `@supabase/supabase-js`** as a dependency (used only in the API functions).
+
+## Environment Variables Needed in Vercel
+
+You'll need to add these to your Vercel project settings (Settings → Environment Variables):
+- `SUPABASE_URL` — your Supabase project URL
+- `SUPABASE_SERVICE_ROLE_KEY` — the service role key (server-side only, never exposed to the client)
+
+## Important Notes
+- Database writes happen server-side only (in Vercel functions), so the service role key is never exposed to the browser.
+- If a DB insert fails, the email will still have been sent — the API will log the error but still return success to the user (emails are the primary action).
+- RLS can be enabled on both tables with no policies (since we use the service role key server-side, it bypasses RLS).
+
