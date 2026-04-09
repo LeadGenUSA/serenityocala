@@ -1,17 +1,23 @@
 
 
-## Fix Mobile Menu: White Background, Phone Number & Search Visible
+## Use Serenity Institute Logo as Favicon
 
-**Problem**: The mobile dropdown menu has a transparent background (inherits from header), making links invisible. Phone number and search are buried below.
+The logo is at `src/assets/serenity-new-logo.png` (used in Header and Footer). To use it as a favicon:
 
-**Changes in `src/components/Header.tsx`**:
+**Steps:**
 
-1. **White background on mobile menu** — Add `bg-white rounded-lg shadow-lg p-4` to the mobile menu container (line 96-98) so links are readable against a solid background.
+1. **Copy the logo to `public/`** — Copy `src/assets/serenity-new-logo.png` to `public/favicon.png`.
 
-2. **Show phone number and search in the top bar on mobile** — Move the phone number and search icon out of the hidden mobile dropdown and into the main header bar, visible alongside the hamburger menu on small screens. This means changing the mobile toggle area (around lines 84-91) to include a row with search icon, phone icon, and hamburger menu.
+2. **Delete `public/favicon.ico`** — Remove the default Lovable favicon so browsers don't pick it up automatically.
 
-Specifically:
-- Replace the mobile toggle button section with a flex row containing `<SiteSearch />`, a phone link (icon only), and the hamburger button — all visible on `lg:hidden`.
-- Keep the full phone number, email, and search in the dropdown as well for discoverability.
-- Add `bg-white dark:bg-card rounded-lg shadow-lg` to the mobile dropdown `nav` container.
+3. **Update `index.html`** — Change the favicon link from:
+   ```html
+   <link rel="icon" href="/favicon.ico" />
+   ```
+   to:
+   ```html
+   <link rel="icon" href="/favicon.png" type="image/png" />
+   ```
+
+> **Note:** The logo may not look ideal at very small sizes (16x16 or 32x32) since it was designed as a full logo. If search results still show the old icon, it may take time for search engines to re-crawl. You could also consider using the yin-yang icon (`yin-yang-icon.png`) as an alternative — it may be more recognizable at small sizes.
 
