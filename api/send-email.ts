@@ -70,7 +70,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Serenity Behavioral Health <noreply@serenityocala.com>",
+        from: "Serenity Behavioral Health <noreply@send.mail.serenityocala.com>",
         to: ["drbeth@serenityocala.com"],
         reply_to: email.trim(),
         subject: `New Self-Assessment from ${name.trim()}`,
@@ -92,7 +92,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Serenity Behavioral Health <noreply@serenityocala.com>",
+        from: "Serenity Behavioral Health <noreply@send.mail.serenityocala.com>",
         to: [email.trim()],
         subject: "We received your self-assessment — Serenity Behavioral Health",
         html: confirmationHtml,
