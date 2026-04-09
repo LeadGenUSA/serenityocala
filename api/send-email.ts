@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const RESEND_API_URL = "https://api.resend.com/emails";
+const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS
@@ -8,20 +9,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    return res.status(500).json({ error: "RESEND_API_KEY not configured" });
+  if (!apiKey) return res.status(500).json({ error: "RESEND_API_KEY not configured" });
+
+  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+  if (!turnstileSecret) return res.status(500).json({ error: "TURNSTILE_SECRET_KEY not configured" });
+
+  const { name, email, checkedItems, message, turnstileToken } = req.body || {};
+
+  // Verify Turnstile
+  if (!turnstileToken || typeof turnstileToken !== "string") {
+    return res.status(400).json({ error: "Please complete the CAPTCHA" });
   }
 
-  const { name, email, checkedItems, message } = req.body || {};
+  try {
+    const tvRes = await fetch(TURNSTILE_VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${encodeURIComponent(turnstileSecret)}&response=${encodeURIComponent(turnstileToken)}`,
+    });
+    const tvData = await tvRes.json();
+    if (!tvData.success) {
+      return res.status(400).json({ error: "CAPTCHA verification failed" });
+    }
+  } catch {
+    return res.status(500).json({ error: "CAPTCHA verification error" });
+  }
 
   // Validate
   if (!name || typeof name !== "string" || name.trim().length === 0 || name.length > 100) {
@@ -62,7 +78,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   `;
 
   try {
-    // Send notification to practice
     const notifRes = await fetch(RESEND_API_URL, {
       method: "POST",
       headers: {
@@ -84,7 +99,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({ error: "Failed to send notification email" });
     }
 
-    // Send confirmation to submitter
     await fetch(RESEND_API_URL, {
       method: "POST",
       headers: {
