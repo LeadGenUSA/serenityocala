@@ -35,7 +35,7 @@ export const HeroSection = () => {
 
           <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 animate-fade-in-up opacity-0 delay-200">
             Dr. Beth Robinson, PhD, LHMC offers compassionate counseling for adults, 
-            children, and couples. Over 20 years helping people transform their lives 
+            adolescents, and couples. Over 20 years helping people transform their lives 
             through EFT, EMDR, CBT, and Animal Assisted Psychotherapy.
           </p>
 
