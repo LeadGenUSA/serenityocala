@@ -22,18 +22,44 @@ const SelfAssessment = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) {
       toast.error("Please fill in your name and email.");
       return;
     }
-    toast.success("Thank you! We'll be in touch soon.");
-    setChecked({});
-    setName("");
-    setEmail("");
-    setMessage("");
+
+    const checkedItems = checklistItems.filter((_, i) => checked[i]);
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          checkedItems,
+          message: message.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send");
+      }
+
+      toast.success("Thank you! We'll be in touch soon.");
+      setChecked({});
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      toast.error("Something went wrong. Please try calling us at 352-671-7932.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,8 +135,8 @@ const SelfAssessment = () => {
               </div>
             </div>
 
-            <Button type="submit" size="lg">
-              Submit Assessment
+            <Button type="submit" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Submit Assessment"}
             </Button>
           </form>
         </div>
