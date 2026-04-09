@@ -114,6 +114,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }),
     });
 
+    // Save to Supabase
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (supabaseUrl && supabaseKey) {
+      try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        await supabase.from("contact_submissions").insert({
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim(),
+          phone: phone?.trim() || null,
+          message: message.trim(),
+        });
+      } catch (dbErr) {
+        console.error("Supabase insert error:", dbErr);
+      }
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error("Send email error:", err);
