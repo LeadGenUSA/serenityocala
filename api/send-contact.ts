@@ -108,7 +108,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       body: JSON.stringify({
         from: "Serenity Institute <noreply@send.mail.serenityocala.com>",
         to: [email.trim()],
-        subject: "We received your message — Serenity Behavioral Health",
+        subject: "We received your message — Serenity Institute",
         html: confirmationHtml,
       }),
     });
