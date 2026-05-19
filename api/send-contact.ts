@@ -57,8 +57,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "Invalid message" });
   }
 
-  const sanitize = (s: string) =>
-    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const sanitize = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   const fullName = `${sanitize(firstName.trim())} ${sanitize(lastName.trim())}`;
 
@@ -75,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     <h2>Thank you, ${sanitize(firstName.trim())}!</h2>
     <p>We've received your message and will be in touch soon.</p>
     <p>If you have any questions in the meantime, please call us at <strong>352-671-7932</strong> or reply to this email.</p>
-    <p>— Serenity Behavioral Health</p>
+    <p>— Serenity Institute</p>
   `;
 
   try {
@@ -86,7 +85,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Serenity Behavioral Health <noreply@send.mail.serenityocala.com>",
+        from: "Serenity Institute <noreply@send.mail.serenityocala.com>",
         to: ["drbeth@serenityocala.com"],
         reply_to: email.trim(),
         subject: `New Contact from ${firstName.trim()} ${lastName.trim()}`,
@@ -107,7 +106,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Serenity Behavioral Health <noreply@send.mail.serenityocala.com>",
+        from: "Serenity Institute <noreply@send.mail.serenityocala.com>",
         to: [email.trim()],
         subject: "We received your message — Serenity Behavioral Health",
         html: confirmationHtml,
