@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Heart, PawPrint, Shield, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import bethAndJuli from "@/assets/beth-and-juli.jpg";
-import juliTherapyRoom from "@/assets/juli-therapy-room.jpg";
+import juliTherapyRoom from "@/assets/juli-therapy-room.png";
 
 const AnimalAssistedTherapy = () => {
   return (
