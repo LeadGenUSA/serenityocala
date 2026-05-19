@@ -55,8 +55,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "Invalid checkedItems" });
   }
 
-  const sanitize = (s: string) =>
-    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const sanitize = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   const itemsList = (checkedItems as string[] | undefined)?.length
     ? `<ul>${(checkedItems as string[]).map((i: string) => `<li>${sanitize(i)}</li>`).join("")}</ul>`
@@ -75,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     <h2>Thank you, ${sanitize(name.trim())}!</h2>
     <p>We've received your self-assessment and will be in touch soon.</p>
     <p>If you have any questions in the meantime, please call us at <strong>352-671-7932</strong> or reply to this email.</p>
-    <p>— Serenity Behavioral Health</p>
+    <p>— Serenity Institute</p>
   `;
 
   try {
@@ -86,7 +85,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Serenity Behavioral Health <noreply@send.mail.serenityocala.com>",
+        from: "Serenity Institute <noreply@send.mail.serenityocala.com>",
         to: ["drbeth@serenityocala.com"],
         reply_to: email.trim(),
         subject: `New Self-Assessment from ${name.trim()}`,
@@ -107,9 +106,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Serenity Behavioral Health <noreply@send.mail.serenityocala.com>",
+        from: "Serenity Institute <noreply@send.mail.serenityocala.com>",
         to: [email.trim()],
-        subject: "We received your self-assessment — Serenity Behavioral Health",
+        subject: "We received your self-assessment — Serenity Institute",
         html: confirmationHtml,
       }),
     });
